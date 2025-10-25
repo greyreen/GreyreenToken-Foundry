@@ -1,0 +1,34 @@
+# .github/workflows/ci.yml
+
+name: Foundry Token CI Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. Foundry'yi Kurma Adımı (Forge & Cast)
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly # Veya 'latest' kullanabiliriz
+
+      # 2. OpenZeppelin Kütüphanesini Kurma
+      - name: Install Dependencies (OpenZeppelin)
+        run: forge install openzeppelin/openzeppelin-contracts
+
+      # 3. Derleme
+      - name: Build Contracts
+        run: forge build
+
+      # 4. Testleri Çalıştırma
+      - name: Run Tests
+        run: forge test
