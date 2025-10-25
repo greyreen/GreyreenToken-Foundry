@@ -1,0 +1,10 @@
+# Çıktı ve Önbellek Klasörleri (Foundry)
+/out
+/cache
+/artifacts
+
+# Bağımlılıklar
+/lib
+
+# İletimsel (Generated) Dosyalar
+.DS_Store
